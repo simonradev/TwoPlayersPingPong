@@ -43,7 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalConstants\ConsoleCursorVisablity.cs" />
-    <Compile Include="GlobalConstants\ConsoleParamsConstants.cs" />
+    <Compile Include="GlobalConstants\ConsoleManager.cs" />
+    <Compile Include="Players\LeftPlayer.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Positions\Position.cs" />
     <Compile Include="Positions\Reposition.cs" />

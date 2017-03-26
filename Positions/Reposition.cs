@@ -16,7 +16,7 @@
             Down
         }
 
-        public static Position GetThePlayersNewPosition(PlayerDirections direction)
+        public static Position GetThePlayersBarNewPosition(PlayerDirections direction)
         {
             int index = (int)direction;
 

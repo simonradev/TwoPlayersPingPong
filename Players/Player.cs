@@ -2,15 +2,18 @@
 {
     using System;
     using TwoPlayersPingPong.Positions;
+    using TwoPlayersPingPong.GlobalConstants;
 
     public class Player
     {
-        private Position[] position;
-        private const int BarSize = 5;
+        public Position[] barPosition;
+        public static readonly int BarSize = 5;
+        private const int TopMostElement = 0;
+        private const int BotMostElement = 4;
 
         public Player()
         {
-            position = new Position[BarSize];
+            barPosition = new Position[BarSize];
         }
 
         public virtual void InitializePlayersBar()
@@ -18,14 +21,46 @@
             throw new NotImplementedException();
         }
 
-        public virtual void MovePlayersBarUp()
+        public void MovePlayersBarUp()
         {
+            if (!MoveIsValid(barPosition[TopMostElement]))
+            {
+                return;
+            }
 
+            UpdateThePlayersBar(Reposition.PlayerDirections.Up);
+        }
+        
+        public void MovePlayersBarDown()
+        {
+            if (!MoveIsValid(barPosition[BotMostElement]))
+            {
+                return;
+            }
+
+            UpdateThePlayersBar(Reposition.PlayerDirections.Down);            
         }
 
-        public virtual void MovePlayersBarDown()
+        private void UpdateThePlayersBar(Reposition.PlayerDirections direction)
         {
+            Position newRows = Reposition.GetThePlayersBarNewPosition(direction);
 
+            for (int currPosition = 0; currPosition < barPosition.Length; currPosition++)
+            {
+                barPosition[currPosition].Row = barPosition[currPosition].Row + newRows.Row;
+            }
+        }
+
+        private bool MoveIsValid(Position position)
+        {
+            bool isValid = true;
+
+            if (position.Row == 0 || position.Row == ConsoleManager.MaxWindowRows)
+            {
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }
